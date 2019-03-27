@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**timestamp** | [**DateTime**](DateTime.md) |  |  [optional]
+**timestamp** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
 **metrics** | [**StatMetrics**](StatMetrics.md) |  |  [optional]
 
 

@@ -1,23 +1,23 @@
 # AppsApi
 
-All URIs are relative to *https://127.0.0.1:8080/v1*
+All URIs are relative to *https://127.0.0.1:8080/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**appsAppDelete**](AppsApi.md#appsAppDelete) | **DELETE** /apps/{app} | Delete an app.
-[**appsAppGet**](AppsApi.md#appsAppGet) | **GET** /apps/{app} | Get information for a app.
-[**appsAppPatch**](AppsApi.md#appsAppPatch) | **PATCH** /apps/{app} | Updates an app.
-[**appsGet**](AppsApi.md#appsGet) | **GET** /apps | Get all app names.
-[**appsPost**](AppsApi.md#appsPost) | **POST** /apps | Post new app
+[**createApp**](AppsApi.md#createApp) | **POST** /apps | Create A New Application
+[**deleteApp**](AppsApi.md#deleteApp) | **DELETE** /apps/{appID} | Delete An Application
+[**getApp**](AppsApi.md#getApp) | **GET** /apps/{appID} | Get Information For An Application
+[**listApps**](AppsApi.md#listApps) | **GET** /apps | Get A List Of Applications
+[**updateApp**](AppsApi.md#updateApp) | **PUT** /apps/{appID} | Update an Application
 
 
-<a name="appsAppDelete"></a>
-# **appsAppDelete**
-> appsAppDelete(app)
+<a name="createApp"></a>
+# **createApp**
+> App createApp(body)
 
-Delete an app.
+Create A New Application
 
-Delete an app.
+Creates a new Application, returning the complete entity.
 
 ### Example
 ```java
@@ -27,11 +27,12 @@ Delete an app.
 
 
 AppsApi apiInstance = new AppsApi();
-String app = "app_example"; // String | Name of the app.
+App body = new App(); // App | Application data to insert.
 try {
-    apiInstance.appsAppDelete(app);
+    App result = apiInstance.createApp(body);
+    System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling AppsApi#appsAppDelete");
+    System.err.println("Exception when calling AppsApi#createApp");
     e.printStackTrace();
 }
 ```
@@ -40,7 +41,51 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **app** | **String**| Name of the app. |
+ **body** | [**App**](App.md)| Application data to insert. |
+
+### Return type
+
+[**App**](App.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="deleteApp"></a>
+# **deleteApp**
+> deleteApp(appID)
+
+Delete An Application
+
+Delete the specified Application.
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.ApiException;
+//import io.swagger.client.api.AppsApi;
+
+
+AppsApi apiInstance = new AppsApi();
+String appID = "appID_example"; // String | Opaque, unique Application ID.
+try {
+    apiInstance.deleteApp(appID);
+} catch (ApiException e) {
+    System.err.println("Exception when calling AppsApi#deleteApp");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **appID** | **String**| Opaque, unique Application ID. |
 
 ### Return type
 
@@ -55,13 +100,13 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="appsAppGet"></a>
-# **appsAppGet**
-> AppWrapper appsAppGet(app)
+<a name="getApp"></a>
+# **getApp**
+> App getApp(appID)
 
-Get information for a app.
+Get Information For An Application
 
-This gives more details about a app, such as statistics.
+Returns more details about an Application, such as statistics.
 
 ### Example
 ```java
@@ -71,12 +116,12 @@ This gives more details about a app, such as statistics.
 
 
 AppsApi apiInstance = new AppsApi();
-String app = "app_example"; // String | name of the app.
+String appID = "appID_example"; // String | Opaque, unique Application ID.
 try {
-    AppWrapper result = apiInstance.appsAppGet(app);
+    App result = apiInstance.getApp(appID);
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling AppsApi#appsAppGet");
+    System.err.println("Exception when calling AppsApi#getApp");
     e.printStackTrace();
 }
 ```
@@ -85,11 +130,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **app** | **String**| name of the app. |
+ **appID** | **String**| Opaque, unique Application ID. |
 
 ### Return type
 
-[**AppWrapper**](AppWrapper.md)
+[**App**](App.md)
 
 ### Authorization
 
@@ -100,60 +145,13 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="appsAppPatch"></a>
-# **appsAppPatch**
-> AppWrapper appsAppPatch(app, body)
+<a name="listApps"></a>
+# **listApps**
+> AppList listApps(cursor, perPage, name)
 
-Updates an app.
+Get A List Of Applications
 
-You can set app level settings here. 
-
-### Example
-```java
-// Import classes:
-//import io.swagger.client.ApiException;
-//import io.swagger.client.api.AppsApi;
-
-
-AppsApi apiInstance = new AppsApi();
-String app = "app_example"; // String | name of the app.
-AppWrapper body = new AppWrapper(); // AppWrapper | App to post.
-try {
-    AppWrapper result = apiInstance.appsAppPatch(app, body);
-    System.out.println(result);
-} catch (ApiException e) {
-    System.err.println("Exception when calling AppsApi#appsAppPatch");
-    e.printStackTrace();
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **app** | **String**| name of the app. |
- **body** | [**AppWrapper**](AppWrapper.md)| App to post. |
-
-### Return type
-
-[**AppWrapper**](AppWrapper.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-<a name="appsGet"></a>
-# **appsGet**
-> AppsWrapper appsGet(cursor, perPage)
-
-Get all app names.
-
-Get a list of all the apps in the system, returned in alphabetical order.
+Get a filtered list of Applications in alphabetical order.
 
 ### Example
 ```java
@@ -165,11 +163,12 @@ Get a list of all the apps in the system, returned in alphabetical order.
 AppsApi apiInstance = new AppsApi();
 String cursor = "cursor_example"; // String | Cursor from previous response.next_cursor to begin results after, if any.
 Integer perPage = 56; // Integer | Number of results to return, defaults to 30. Max of 100.
+String name = "name_example"; // String | The Application name to filter by.
 try {
-    AppsWrapper result = apiInstance.appsGet(cursor, perPage);
+    AppList result = apiInstance.listApps(cursor, perPage, name);
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling AppsApi#appsGet");
+    System.err.println("Exception when calling AppsApi#listApps");
     e.printStackTrace();
 }
 ```
@@ -180,10 +179,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cursor** | **String**| Cursor from previous response.next_cursor to begin results after, if any. | [optional]
  **perPage** | **Integer**| Number of results to return, defaults to 30. Max of 100. | [optional]
+ **name** | **String**| The Application name to filter by. | [optional]
 
 ### Return type
 
-[**AppsWrapper**](AppsWrapper.md)
+[**AppList**](AppList.md)
 
 ### Authorization
 
@@ -194,13 +194,13 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="appsPost"></a>
-# **appsPost**
-> AppWrapper appsPost(body)
+<a name="updateApp"></a>
+# **updateApp**
+> App updateApp(appID, body)
 
-Post new app
+Update an Application
 
-Insert a new app
+Updates an Application via merging the provided values.
 
 ### Example
 ```java
@@ -210,12 +210,13 @@ Insert a new app
 
 
 AppsApi apiInstance = new AppsApi();
-AppWrapper body = new AppWrapper(); // AppWrapper | App to post.
+String appID = "appID_example"; // String | Opaque, unique Application ID.
+App body = new App(); // App | Application data to merge with current values.
 try {
-    AppWrapper result = apiInstance.appsPost(body);
+    App result = apiInstance.updateApp(appID, body);
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling AppsApi#appsPost");
+    System.err.println("Exception when calling AppsApi#updateApp");
     e.printStackTrace();
 }
 ```
@@ -224,11 +225,12 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**AppWrapper**](AppWrapper.md)| App to post. |
+ **appID** | **String**| Opaque, unique Application ID. |
+ **body** | [**App**](App.md)| Application data to merge with current values. |
 
 ### Return type
 
-[**AppWrapper**](AppWrapper.md)
+[**App**](App.md)
 
 ### Authorization
 
