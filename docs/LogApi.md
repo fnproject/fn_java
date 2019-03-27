@@ -1,19 +1,19 @@
 # LogApi
 
-All URIs are relative to *https://127.0.0.1:8080/v1*
+All URIs are relative to *https://127.0.0.1:8080/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**appsAppCallsCallLogGet**](LogApi.md#appsAppCallsCallLogGet) | **GET** /apps/{app}/calls/{call}/log | Get call logs
+[**getCallLogs**](LogApi.md#getCallLogs) | **GET** /fns/{fnID}/calls/{callID}/log | Get logs for a call.
 
 
-<a name="appsAppCallsCallLogGet"></a>
-# **appsAppCallsCallLogGet**
-> LogWrapper appsAppCallsCallLogGet(app, call)
+<a name="getCallLogs"></a>
+# **getCallLogs**
+> Log getCallLogs(fnID, callID)
 
-Get call logs
+Get logs for a call.
 
-Get call logs
+Get logs for a call.
 
 ### Example
 ```java
@@ -23,13 +23,13 @@ Get call logs
 
 
 LogApi apiInstance = new LogApi();
-String app = "app_example"; // String | App Name
-String call = "call_example"; // String | Call ID.
+String fnID = "fnID_example"; // String | Opaque, unique Function ID.
+String callID = "callID_example"; // String | Opaque, unique Call ID.
 try {
-    LogWrapper result = apiInstance.appsAppCallsCallLogGet(app, call);
+    Log result = apiInstance.getCallLogs(fnID, callID);
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling LogApi#appsAppCallsCallLogGet");
+    System.err.println("Exception when calling LogApi#getCallLogs");
     e.printStackTrace();
 }
 ```
@@ -38,12 +38,12 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **app** | **String**| App Name |
- **call** | **String**| Call ID. |
+ **fnID** | **String**| Opaque, unique Function ID. |
+ **callID** | **String**| Opaque, unique Call ID. |
 
 ### Return type
 
-[**LogWrapper**](LogWrapper.md)
+[**Log**](Log.md)
 
 ### Authorization
 
